@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css" integrity="sha512-RvQxwf+3zJuNwl4e0sZjQeX7kUa3o82bDETpgVCH2RiwYSZVDdFJ7N/woNigN/ldyOOoKw8584jM4plQdt8bhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+
+    
+    <style>
+        /* Hero Area CSS Start */
+.hero-slider {
+  max-width: 1440px;
+}
+
+.slider {
+  height: 700px;
+}
+
+.mySwiper {
+  width: 1012px;
+  height: 175px;
+  margin-top: -87px;
+}
+
+.swiper-slide {
+  cursor: pointer;
+}
+
+.hero-slider-next,
+.hero-slider-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 35px;
+  height: 45px;
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  border: none;
+}
+
+.hero-slider-next {
+  right: 0;
+}
+
+.preview-slider-next,
+.preview-slider-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  width: 35px;
+  height: 45px;
+  background: #fff;
+  color: #000;
+  border: none;
+  box-shadow: 0 3px 10px 6px rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
+.preview-slider-next {
+  right: 0;
+}
+
+
+/* LightBox CSS */
+#lightbox-wrapper {
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.8);
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  overflow-y: scroll;
+  padding-top: 100px;
+  padding-bottom: 30px;
+}
+
+#lightbox-wrapper .category-name {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: #fff;
+  z-index: 99999;
+}
+
+#lightbox-wrapper .close-btn {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  border: none;
+  background: transparent;
+  color: #fff;
+}
+
+#lightbox-wrapper .close-btn:hover {
+  color: var(--primary-color);
+}
+
+#lightbox-wrapper .img-box {
+  max-width: 60%;
+  border: 5px solid #fff;
+  margin: auto;
+  overflow: hidden;
+}
+
+#lightbox-wrapper .img-box img {
+  width: 100%;
+  height: 100%;
+}
+
+
+.category-slide {
+  position: relative;
+}
+
+.category-slide::after {
+  content: '';
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.category-slide .counter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+
+.category-slide:hover::after,
+.category-slide:hover .counter {
+  visibility: hidden;
+}
+
+.category-slide .counter i {
+  font-size: 40px;
+  color: rgba(255,255,255,0.8);
+  margin-right: 10px;
+}
+
+.category-slide .counter .slideCounter {
+  font-size: 30px;
+  color: rgba(255,255,255,0.8);
+}
+
+.category-slide.active::after,
+.category-slide.active .counter {
+  display: none;
+}
+
+/* Hero Area CSS End */
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-0">
+        <div class="hero-slider mx-auto">
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider patiosPathwaysSlider" data-category-name="Patios & Pathways">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b0bbb19e-6a1b-4790-a7db-b626c92e9b3c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/fd644e3e-8bf8-439c-91f3-089f94abf66e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/34a349cc-158d-4951-be15-75739d2c791a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/fb349571-cd29-4464-bd64-35529a4e6c23.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/722a5aa8-3116-43b6-b580-a0eeef1b9d63.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/932352e0-fc2a-4a6c-8e78-18c846174fb9.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a33cc547-2104-4451-9a51-a49a3b2c6013.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6e5a95e6-ca67-4453-92c9-7e2cd5e85db8.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5f9f7bce-5ade-41cd-9691-c6dbe71acb58.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/73f8f39d-c0d5-4628-adda-d688ecff6798.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/016cd005-c2c7-4000-8f24-19806aa31702.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/84421193-f187-4c3e-81d0-4556edeca996.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/425d1755-fd9c-46ee-bb64-5c4b820ee71a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0409922a-d288-41e2-8b57-fc113528ab1d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3bed71af-1458-4fdf-877b-79dfc6e69d52.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0cf74f17-9dc7-4e6b-9c57-0429d0c4a20d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/db582243-919f-4e62-afff-2b8b150478d6.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d45dd650-8856-4934-824e-f5a971d7edf2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3a4e6a1e-e386-4c7c-af0e-42c333e77e28.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3d3322d1-cea1-43f4-84be-3a2f9c2acb67.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/07455b3a-f6b4-4fc6-b5c0-6f01a86dad56.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e964c099-86a1-40fa-83fa-b62d229aafa4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/940cf75d-f43b-4f87-a116-65dac98f4cb7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/22b6dc6a-75d7-4854-b0fd-36b3861d8e2e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/c7baf5b5-eaa0-42f7-b5d9-804e402b4f99.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b14f7dc5-167a-44af-b974-5a96a1494c18.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a00a7566-293d-4937-b9e3-bc373a70d6a4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/066a66b4-0de9-4062-a916-284fda53bbaf.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2dfd6a0e-1828-49d0-8fd2-94280809c025.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/df16fcd7-9957-4139-bbfe-273ef3cfbeb5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d606ecef-d3a9-40f9-be57-4048ede4f288.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/66093d3c-98b1-4a7e-9236-5ea6e30edc3e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1fff7a64-0d7d-4a1a-8110-b5d3e9010817.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5e725e8e-e3f4-4f90-8a4a-fe5dd68c2182.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/82a9b0da-db2d-45b7-96a9-74fde4199515.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b1109528-ac87-4784-9680-9f9e47c344ee.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/bebef398-c8ca-4b0f-beea-6a86851d0c24.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/eccc7b0d-c757-4ce1-8359-0e08a5ce97e8.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/799187a5-f0d8-4681-920b-dfdbb5caebda.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/330b557a-4174-4d24-a537-b21424083875.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/df553b78-80f9-4599-8d02-b97dd5c500b9.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1b2a0d1f-1883-4676-9ea5-c02524f98a1d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6cb36b41-9e81-4dca-875a-cf3d2d7ef4b9.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a65c8961-da9a-43ee-b628-f0b421c6316d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dfc61832-d2a9-4d3c-8e23-cf45e94f9ae2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/bf38535a-6f6c-4438-a269-16d0b65b2d84.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9731b7c6-d434-4734-85f2-b43dbab8c7e9.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a5ef5941-835b-421d-83ef-0325b40dcf29.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/88231636-f3a2-4252-bdde-f2ca298525ad.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/4f835037-8f1a-4e34-bc0b-14ada751c6e3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/da6705f5-ffd0-415c-9d1a-d587be60575f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8feca441-543e-4f7c-9d07-007e63ee1c92.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3625d724-0168-4f81-8d96-908d0606922a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b987b5d4-2555-4be7-b2ce-3ee351b12034.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/497d0e45-b76e-4897-a0d3-e38467610e1d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/c5ba1db4-b385-4260-9a8d-317cc6e8840c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a4c6b909-470c-4a27-aac1-3bd27c595acc.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/59266f58-c58e-49df-ac90-276bd9130bf3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/687ddad2-1d27-45fb-ab2f-195b7fbd2c8a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a66be9c9-9859-428b-bdce-91d04eebfde7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8e6e952c-d390-4a95-820c-8d180fe55bf4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/fa9d4500-9c8b-4f5a-aef4-a2fdf4081b77.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dab83ce1-0fc2-428e-b662-bf4983576980.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/99f40ca4-c10b-437a-b018-5b7449147ac1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8c328f72-3186-4ef3-a37e-21e49963545c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b9fdd5de-2b82-4646-b614-be154598a136.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/558c0c0a-d456-4456-80b3-d1fd526d2e4e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3d5ff28f-64a8-4899-a272-dfc2c0748ba8.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7dc5e07c-094a-41c9-aa55-ba19ee3d721f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/22ccbf70-c7ca-464e-b7aa-eedff57cd4e5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/abffa4e4-41f4-42dd-b6ea-3842714cff92.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2b1ea7e6-b93f-4447-892e-1c30fc433f3e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/63f37709-f3b0-463a-b817-07486e609d30.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/123fd75b-f5b7-4fe6-b849-f041b3d66180.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/99e65297-ba19-49b3-b431-827207656a92.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/407ba453-034d-46ed-a8c1-14cbbe1fb12f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0b564755-f7d1-4f6d-96f9-f41defbefec2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d186944a-e64f-4abb-a5ef-2db1e7c77acb.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/45833a48-07b0-47b2-9ffc-e424d4980839.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b56a0d70-6e82-459a-bbdd-f4b5722e7801.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8cf35196-dcde-4252-800d-538eeee8b40e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/c252e1d4-7abb-4b57-9380-f1c1eacb10dd.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1563becb-6867-4fd1-9f7e-8ad7e1a59c50.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;"/>
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+
+
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider pondsWaterFeaturesSlider d-none" data-category-name="Ponds & Water features">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/064d8ac8-1d6b-4803-a6a5-04a71d1392fe.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/90a8d125-862b-4b14-bfcc-8f10e5144ba3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/bcbcd66b-f14b-497c-8a39-80c32cb966d4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b2f3d3ed-5cef-47e4-9972-333e966c9fc6.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9571de0e-543f-4d2d-afe3-0a11c6855cfe.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/482ef5c4-7c74-483f-a575-09a818b925b5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a543c113-7c71-4c5d-b25d-93115de59533.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2aee9883-c557-4f8a-8ced-1d3dd8b9773d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ab01cf69-3d93-4dde-8d82-ae39863f266e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/620ef613-5214-4f85-89d4-7a7b1bf4e75d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ec9cc9f2-bf50-40cd-81f9-eda822f72d9b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7b4784d0-eb31-41f4-ae2e-d424e3adcc87.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b69c5d14-1664-4619-8bfc-74dbf7d02a9e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/19723f30-c6b4-4edd-92e2-231911238971.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5a08b1ae-c374-436c-8e98-8e1be5461d4a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/50a43b76-6cb6-4e38-bca1-def00d4dde16.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6c5d83b6-b20c-4571-a3b5-30e661f39bce.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3e62d3c5-4e06-4550-ae75-8070ad050029.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7e6a3032-d99b-42e7-8d6f-0bb84ce1d6be.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b90c4a0f-6f5c-40c6-af82-bbc2378330f3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/f2fd8bb7-a9e7-4d69-b9b5-01d8b8a92a9f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/44cf54a3-9dac-4584-a4ab-ee6df4c4af2d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/18eec9a0-4756-435b-a911-9d3a11f2860b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider drivewaysBlockPavingSlider d-none" data-category-name="Driveways & Block paving">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dc64722f-168e-456a-8396-580a00081660.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/bc4cef2c-912c-41a2-a77f-884c30bd30da.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1726b450-27b5-4366-a549-1a883ded584c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/97edc9bd-d8c9-4da7-ab06-396e53968f76.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/38fde636-f236-44e7-8e15-7fd2a71b3867.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e165c9a3-adbf-4e22-96bb-08e85fdfe229.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e58d4eb1-0648-4fcb-bcd6-d0141ecd8d25.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e383aa9b-c43c-4e3f-a3d2-95deecd41300.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b4ae57e1-01ef-4bf8-8bc6-a8892758df51.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8aef4c62-eab1-4fb1-98c8-35c722a24d30.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b75ccfc1-dfa4-423e-89a9-622a3ecfd474.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6212f426-b9c4-4354-a442-6c422bbca136.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2922654a-3088-4847-a58c-5b713d56ee18.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/87a77475-590c-45fa-ace1-52c5d1dda670.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/acfaa480-6da6-4b70-bdb0-1c676aa2fbf5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0136f6e0-f2d5-4276-baee-242e9715ae6b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5b9c0c46-fc3d-4021-bf24-6e08192e5a06.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9d92f178-3e9a-4bf2-a66e-088249390ca5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/139496bc-9402-48be-87a5-d2d23547d158.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/92f6c90f-e5a1-4fb4-924b-9e754d91508b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/349432c1-5bfb-4f1e-a4c7-c11a7ddb6d4d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/06f91b20-cc8a-4bc3-835e-4c8641e6b45b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/4e4ecc0f-1448-4629-b3d1-032ed6560ce7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ac582bd7-9cf2-4091-ac61-f08f20228bba.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/4bb9ccbc-a692-4b4a-a080-735fc45d39e1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e0173cdf-21d5-4901-9afe-b916b6573bd3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9842d001-1ca1-4410-afe1-d96e33671e3e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/948c5b12-0d67-468a-be10-7a28ae6fece8.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/346192b0-fb23-4231-81ed-e8c42960fad6.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/79eccfeb-0fa3-412d-964f-2828c6726323.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a2a66688-2a7d-4a76-86c2-bc280f8c11d1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1c58a61e-aeaf-48fa-8f3a-08966490769d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/20aadee2-5b13-4307-8af2-fb8226f7ea55.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/78b9b1d9-c0c0-4114-97ad-67c2cba5ffae.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ca00ba4a-7a80-4c4b-85ad-f89b02231475.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6428ae47-9150-4531-9451-7cc2233b65e2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d1d28483-9a4f-49f0-a9a2-0bba675294f7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/272311a3-3f25-45d6-b077-3c2dd83b5ced.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/45d8801a-0ec1-4014-a22e-f2df0e202532.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+
+
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider pergolasDeckingSlider d-none" data-category-name="Pergolas & Decking">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cfde518f-db2a-4d96-92e7-1cd29702f8fe.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/564c2612-cff4-4aad-a522-015e183f4144.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1accfd03-0554-48f3-9420-05bf9c892abc.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/adbfa9bb-d8d9-4dca-9ef1-2d5a0fb306e7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/4d845aa5-c858-4cdf-ab03-63ed66356522.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e4903fe6-8ca2-4358-9de6-f3cda6235f7a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dcdab03d-3edf-48d2-aa3b-9443477cc796.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b327d6a0-312f-4acc-916a-336d68766546.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/3d9f5385-7c33-40ef-ad3e-9e10379182eb.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7ce9bf06-4bfd-48f2-8a34-fe750dc9cebe.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6772d637-4086-46e2-9330-7ff67cdf2cdb.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8bad32a7-3b9d-42d9-b991-76c480788222.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7c0b30e1-f2e1-4937-a7fa-ddf2e18f5953.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/791d9b3c-0c76-4a50-bc1c-410288677c29.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/efb2c673-2f17-4362-98b4-686ad56d96c0.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9fcccaea-17ee-4cc9-ab0d-c130fe73ab1c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d1696207-95c1-4a96-bc3a-52f6c1b2dcc9.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7fc13b80-0710-4fb9-a746-dd074bef3c7b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d5510b8f-f845-4f6b-8e68-1d11a1ee4ef6.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/f5393553-c286-4186-812d-6825a834b6c0.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9330ae35-5e1b-4145-a248-561a14fde7cf.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ae353d52-4dd0-4309-ae3b-4129ee3bf8b1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/94e033ff-3b79-46d2-8a13-ceb540bc4800.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2f65e095-1af7-431b-bf6e-1917f644e103.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/bb47004b-3379-4bde-886b-3e233fb6a940.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/81e25b55-0d46-4172-89b0-c853abf992c3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0da47593-3ac9-439a-9f9e-2072dcdcd2b0.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5e799510-232d-4498-8f76-6198f7979884.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b8624cc4-4e3a-4630-8d64-760cf633f6ba.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dba2b5f9-0fcf-4ea5-a9e5-47d95b178cda.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a8402417-78ea-47a6-896e-784aa79ca5f4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5d4ca5bd-b68a-48fd-8158-9fd85c2fa643.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b7045d81-4877-44b7-b2e2-dfd2400dc7e4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/c446256e-d5eb-4683-8eb1-02e0c45bd538.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7e0616a2-4f0c-4675-87a0-03a94830bde7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7528a8c0-625b-4ae7-b74d-f43397b5543b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7c8fc2cb-eaee-478c-bb74-26d11c21808e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a0200810-2692-4397-a111-df9f04bf713d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/86b46dc1-1cf7-40f8-8e86-1382866ce273.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1889cb81-9fe5-4370-852f-4833e36a8aaf.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/4ca0c84c-243c-44cd-b9d9-98315c32efcd.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b6d09f1b-c2e1-471e-b25c-667f88778fda.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/541b5bc5-7e2a-472e-970d-c84e1f5c998a.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e63a826d-e54f-4bf2-bd2d-4bcaa86a10b1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+
+
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider shedsGardenRoomsFencingSlider d-none" data-category-name="Sheds, Garden Rooms and Fencing">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/41b66874-e03c-4829-b3ad-6befcde8086b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d0b2faf3-1a8d-4e8d-8b88-38001f3f19e1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/f066047d-bfe6-4c82-a52d-5661d9e3bc35.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/880697fe-b3f2-4975-a682-3fef63eaefbb.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cc42ba19-7a92-48da-9f06-548fef989869.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0bdd377d-cc18-47ea-8bae-735a3bd71ccc.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/730bd696-19a5-4589-9fa9-f45cc84d1f2c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a22b6762-63b6-49db-a498-a6e2bfd5ea58.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2b15658d-0c9b-480d-ae80-9fe3e68dd3d2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2870de9b-09f6-453a-a20a-6082a98370a3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a8a7250c-c5cf-417b-a629-c3fe3970200f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/4ba341e0-4ed8-4868-885d-8ce1e1df4fb4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e9a1f45b-01dd-4af4-8187-80d40a98d8d5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8c4ca092-eb4b-4f06-8418-80c543f2ee38.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/854b3de4-f9ec-41a5-9279-fff807c5f540.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ede45bee-04fc-4190-9e9e-14c9c0299aee.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/d923bb86-78b8-499c-aa91-1c1b6bd50c98.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b4db22ab-e64e-49d8-a56d-cd5fecedd621.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0a19e301-4df3-4bbe-8325-8dc65126b01c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cb01c442-37be-49bd-a4f7-6a771d7bbcd6.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/83d20629-6aa8-45b1-834f-aca139417f8c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/70137d73-5cbf-45a1-9cab-274efc498329.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cfdc5976-3667-4e67-b915-48726469c006.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/61f8e926-e3e3-46c7-96dc-2eb26ebb6b2f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b9cd1204-c4e7-4a94-9413-133ef00141bc.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/c1e749f5-6350-4bf6-b486-32a79dad8185.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/5171cf2a-9f04-4dd9-8ee1-c36bf2833d7f.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0bdd350f-c97d-42d4-b792-a0c9b1422a8b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/04ee4cb6-cc7f-45eb-8105-fc7b2b7d3f4d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/8af42b50-3a89-461e-8f11-537cf1a820d3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/fea78fc3-3c06-4ee9-a41c-d772c3b33785.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b4346e97-e916-4d1b-92ac-982b4bf3bd26.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b04f15e8-bd6b-4801-8a22-16dd8e075614.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider lawnsArtificialTurfSlider d-none" data-category-name="Lawns & Artificial Turf">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ca51c725-a754-42bf-a087-807fb1ef35c8.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6af45c1a-fba6-48e9-8f5f-737f7152aa8e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/045e5d2f-0efe-482f-8a81-b6376d7a38d9.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1b6350e4-aae4-455c-93a9-ccead105bf48.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9c151a44-c92b-4585-83d9-6b16c9f37fea.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1835ac2e-e10a-48a7-9c77-7e31fa822a70.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dcfcba55-3136-435a-aec7-6816979ace3e.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/e9def682-4375-4764-9bc5-35bc0871e0b4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/af7b6e40-879f-4902-a1c5-15c76a2ad2f0.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/aeb79e29-fce3-4e5a-846a-84d4b73a3101.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/aa049740-3a9a-4759-bcfd-285d93f4d684.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/2ca9111c-8f8d-4d7c-baf0-8a7197deaa71.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0ea410d3-f03f-4c9d-a319-65f1ed41377b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/47b3cf2f-6249-4e6d-9361-f6bba6029707.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/be957e5c-69ba-402c-9ddb-640fdb31cdea.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0d131165-eba6-46cb-afed-eeeb07d451d2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/7d936b2a-f0d5-40b0-8655-8348618a6c0c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9a3a2670-28d7-453b-8fb2-433ad6308a26.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/552bb35a-7bb2-47a1-9ae9-b9f981ab5522.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/68a9a66c-89b2-4bbd-9748-152ebd3fc5b5.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b9ee10e3-3bbf-4af6-8409-1b43212f41f7.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/288e811e-3c04-41e4-8230-aae7aa4282f3.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/fac17035-ea1e-4c48-bfe6-7f51b622cdee.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/42c84bd0-0d36-4a1c-ac5f-973b8d97be98.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/de20cd7a-79d1-4bf5-b6f2-6028a5c7ab00.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cad75739-8966-40b4-ab34-f11a14ab0716.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/279f9e5b-4758-4f51-bfa0-d72ab5aeb82d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b5dabea6-83c9-4a0e-a45a-6d9257954dff.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/495e2a9f-27d0-495d-be3b-3663db888d2c.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b9b7e409-d415-4931-9a82-8161584958a1.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/9c05848a-c0f4-457a-93b1-aeffe95f18e4.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/761ab0fc-b624-46e1-b127-59b6177b01dc.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/37ad62fb-f551-464d-8cb6-478921333164.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/6c17c912-c984-4835-ab5c-780a1a0fabdf.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/0a84cdd6-8f9e-4f4d-b924-08a45627acb2.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/71bf8183-ff90-4f0a-90af-17494c7c2e35.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+
+
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper slider teamPhotosSlider d-none" data-category-name="Team photos">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/67e538e9-15de-4a8f-8c53-a813bd0505b8.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/1eba525c-b0cd-48ce-a079-eb4529b9c44d.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/a303c269-a82f-4aa9-8e24-6fcab137df99.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                    <div class="swiper-slide" onclick="openLightbox(this)">
+                        <img src="https://image-service.checkatrade.net/images?image=https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cc8e0c0f-122f-49ea-971e-1c475870e06b.jpg&amp;options=w1024-rj-v1-e365" alt="No alt text provided" loading="eager" style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
+                <button class="hero-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
+
+
+            <!-- Category Thumbnail Slider -->
+            <div class="container px-xxl-5">
+                <div class="preview-slider-wrapper position-relative">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide category-slide active" onclick="openSlider('patiosPathwaysSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/b0bbb19e-6a1b-4790-a7db-b626c92e9b3c.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide category-slide" onclick="openSlider('pondsWaterFeaturesSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/064d8ac8-1d6b-4803-a6a5-04a71d1392fe.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide category-slide" onclick="openSlider('drivewaysBlockPavingSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/dc64722f-168e-456a-8396-580a00081660.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide category-slide" onclick="openSlider('pergolasDeckingSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/cfde518f-db2a-4d96-92e7-1cd29702f8fe.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide category-slide" onclick="openSlider('shedsGardenRoomsFencingSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/41b66874-e03c-4829-b3ad-6befcde8086b.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide category-slide" onclick="openSlider('lawnsArtificialTurfSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/ca51c725-a754-42bf-a087-807fb1ef35c8.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide category-slide" onclick="openSlider('teamPhotosSlider', this)">
+                                <img src="https://s3-eu-west-1.amazonaws.com/cats3.checkatrade.com/Photos/270926/O/67e538e9-15de-4a8f-8c53-a813bd0505b8.jpg" class="w-100 thumbnail-img"  />
+                                <div class="counter">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span class="slideCounter seaCount"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="preview-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="preview-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                </div>
+            </div>
+
+            <!-- LightBox -->
+            <div class="d-none" id="lightbox-wrapper">
+                <h4 class="category-name"></h4>
+                <button class="close-btn" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+                <div class="img-box">
+                    <img src="" alt="" class="lightbox-image">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Hero Area End -->
+
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        // Hero Slider 
+var swiper = new Swiper(".mySwiper", {
+    spaceBetween: 5,
+    slidesPerView: 3,
+    freeMode: true,
+    watchSlidesProgress: true,
+    breakpoints: {
+        575: {
+          spaceBetween: 10,
+        }
+    },
+    navigation: {
+        nextEl: ".preview-slider-next",
+        prevEl: ".preview-slider-prev",
+    },
+  });
+
+
+  var swiper2 = new Swiper(".patiosPathwaysSlider", {
+    initialSlide: 0,
+    spaceBetween: 10,
+    autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+    navigation: {
+      nextEl: ".hero-slider-next",
+      prevEl: ".hero-slider-prev",
+    },
+  });
+
+
+  // Open Slider
+  const openSlider = async (sliderName, catSlide) => {
+    const catSlides = document.querySelectorAll('.category-slide');
+    catSlides.forEach(slide => {
+      slide.classList.remove('active');
+    })
+
+    catSlide.classList.add('active');
+
+    const sliders = document.querySelectorAll('.slider');
+
+    await sliders.forEach(s => {
+        s.classList.add('d-none');
+    });
+    const slider = document.querySelector(`.${sliderName}`);
+    
+    slider.classList.remove('d-none');
+
+    swiper2.destroy();
+
+    swiper2 = new Swiper(`.${sliderName}`, {
+      initialSlide: 0,
+      spaceBetween: 10,
+      autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+      navigation: {
+        nextEl: ".hero-slider-next",
+        prevEl: ".hero-slider-prev",
+      }
+    });
+    
+  }
+
+
+  //   Lightbox
+const openLightbox = (slide) => {
+  const category = slide.parentElement.parentElement.getAttribute('data-category-name');
+  const img = slide.children[0].attributes[0].textContent;
+
+  const lightbox = document.getElementById('lightbox-wrapper');
+  lightbox.classList.remove('d-none');
+
+  lightbox.children[0].textContent= category;
+
+  lightbox.children[2].children[0].attributes[0].textContent = img;
+
+}
+
+// close lightbox
+
+const closeLightbox = () => {
+  document.getElementById('lightbox-wrapper').classList.add('d-none');
+}
+
+const slideCounter = () => {
+  const sliders = document.querySelectorAll('.slider');
+  const categorySlides = document.querySelectorAll('.category-slide');
+
+  for(let i = 0; i<sliders.length; i++) {
+      let slider = sliders[i];
+      
+      let slides = slider.children[0].children.length;
+      
+      categorySlides[i].children[1].children[1].textContent = slides;
+  }
+}
+
+document.addEventListener('load', slideCounter());
+    </script>
+</body>
+</html>
